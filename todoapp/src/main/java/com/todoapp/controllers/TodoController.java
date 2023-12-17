@@ -1,7 +1,7 @@
 package com.todoapp.controllers;
 
-import com.todoapp.models.NewTodo;
-import com.todoapp.models.Todo;
+import com.todoapp.models.dto.NewTodo;
+import com.todoapp.models.dao.Todo;
 import com.todoapp.services.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

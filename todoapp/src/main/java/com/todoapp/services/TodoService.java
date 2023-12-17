@@ -1,7 +1,7 @@
 package com.todoapp.services;
 
-import com.todoapp.models.NewTodo;
-import com.todoapp.models.Todo;
+import com.todoapp.models.dto.NewTodo;
+import com.todoapp.models.dao.Todo;
 
 import java.util.List;
 
