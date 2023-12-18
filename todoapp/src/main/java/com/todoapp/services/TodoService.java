@@ -13,4 +13,6 @@ public interface TodoService {
     Todo save(NewTodo todo);
 
    Todo update(Integer id, UpdateTodo update) throws NoSuchTodoException;
+
+    void delete(Integer id) throws NoSuchTodoException;
 }
