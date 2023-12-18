@@ -23,6 +23,11 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    public Todo getById(Integer id) throws NoSuchTodoException {
+        return todoRepository.findById(id).orElseThrow(NoSuchTodoException::new);
+    }
+
+    @Override
     public Todo save(NewTodo newTodo) {
         Todo todo = new Todo(newTodo.getTitle(), false);
         return todoRepository.save(todo);

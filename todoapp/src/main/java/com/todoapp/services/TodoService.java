@@ -10,9 +10,13 @@ import java.util.List;
 public interface TodoService {
     List<Todo> getTodos();
 
+    Todo getById(Integer id) throws NoSuchTodoException;
+
     Todo save(NewTodo todo);
 
    Todo update(Integer id, UpdateTodo update) throws NoSuchTodoException;
 
     void delete(Integer id) throws NoSuchTodoException;
+
+
 }

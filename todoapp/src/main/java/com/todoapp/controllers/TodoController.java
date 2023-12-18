@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/todos")
 public class TodoController {
 
-
     private TodoService todoService;
 
     public TodoController(TodoService todoService) {
@@ -27,6 +26,13 @@ public class TodoController {
         List<Todo> todos = todoService.getTodos();
         return ResponseEntity.status(HttpStatus.OK).body(todos);
    }
+
+   @GetMapping("/{id}")
+   public ResponseEntity<Todo> getById(@PathVariable Integer id) {
+        Todo todo = todoService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(todo);
+   }
+
 
    @PostMapping
     public ResponseEntity<Todo> save(@RequestBody NewTodo newTodo) {
