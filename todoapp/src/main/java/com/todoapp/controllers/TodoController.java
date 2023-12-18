@@ -1,7 +1,6 @@
 package com.todoapp.controllers;
 
-import com.todoapp.exceptions.NoSuchTodoException;
-import com.todoapp.models.dto.ErrorMessage;
+
 import com.todoapp.models.dto.NewTodo;
 import com.todoapp.models.dao.Todo;
 import com.todoapp.models.dto.UpdateTodo;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/todos")
@@ -22,8 +22,10 @@ public class TodoController {
         this.todoService = todoService;
     }
     @GetMapping
-    public ResponseEntity<List<Todo>> getTodos() {
-        List<Todo> todos = todoService.getTodos();
+    public ResponseEntity<List<Todo>> getTodos(
+            @RequestParam Optional<Boolean> isDone,
+            @RequestParam Optional<String> q) {
+        List<Todo> todos =todoService.getTodos(isDone, q);
         return ResponseEntity.status(HttpStatus.OK).body(todos);
    }
 
@@ -51,11 +53,5 @@ public class TodoController {
         todoService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
    }
-
-   @ExceptionHandler(NoSuchTodoException.class)
-   public ResponseEntity<ErrorMessage> handleNoSuchTodoExceptions(NoSuchTodoException e) {
-       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(e.getMessage()));
-   }
-
 
 }

@@ -7,7 +7,6 @@ import com.todoapp.models.dto.UpdateTodo;
 import com.todoapp.repositories.TodoRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -20,6 +19,19 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public List<Todo> getTodos() {
         return todoRepository.findAll();
+    }
+
+    @Override
+    public List<Todo> getTodos(Optional<Boolean> isDone, Optional<String> q) {
+        if(isDone.isEmpty() && q.isEmpty()) {
+            return getTodos();
+        } else if(isDone.isPresent() && q.isEmpty()) {
+            return todoRepository.findAllByIsDone(isDone.get());
+        } else if(q.isPresent() && isDone.isEmpty()) {
+            return todoRepository.findAllByTitleContainsIgnoreCase(q.get().toLowerCase());
+        } else {
+            return todoRepository.findAllByIsDoneAndTitleContainsIgnoreCase(isDone.get(), q.get());
+        }
     }
 
     @Override

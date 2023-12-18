@@ -6,9 +6,12 @@ import com.todoapp.models.dao.Todo;
 import com.todoapp.models.dto.UpdateTodo;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TodoService {
     List<Todo> getTodos();
+
+    List<Todo> getTodos(Optional<Boolean> isDone, Optional<String> q);
 
     Todo getById(Integer id) throws NoSuchTodoException;
 
