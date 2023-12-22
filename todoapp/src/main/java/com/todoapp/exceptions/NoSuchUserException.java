@@ -4,8 +4,8 @@ import java.util.NoSuchElementException;
 
 public class NoSuchUserException extends NoSuchElementException {
 
-    public static final String MESSAGE = "Nincs user ilyen id-val.";
+    public static final String MESSAGE = "Nincs ilyen user.";
     public NoSuchUserException(Integer id) {
-        super(String.format("%s: %d", MESSAGE, id));
+        super(String.format("%s, akinek az id-ja: %d", MESSAGE, id));
     }
 }

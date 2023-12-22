@@ -5,6 +5,9 @@ import com.todoapp.models.dao.TodoUser;
 import com.todoapp.models.dto.NewUser;
 import com.todoapp.repositories.TodoUserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private TodoUserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
     @Override
     public TodoUser getById(Integer id) throws NoSuchUserException {
         return userRepository.findById(id).orElseThrow(() -> new NoSuchUserException(id));
@@ -25,7 +29,16 @@ public class UserServiceImpl implements UserService {
     public TodoUser convertToUser(NewUser newUser) {
         TodoUser user = new TodoUser();
         user.setUsername(newUser.getUsername());
-        user.setPassword(newUser.getPassword());
+        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         return user;
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+      return userRepository.findByUsername(username)
+              .orElseThrow(() -> new UsernameNotFoundException(NoSuchUserException.MESSAGE));
+
+    }
+
+
 }

@@ -1,7 +1,7 @@
 insert into todousers (username, password) values
-("Jane", "password"),
-("John", "password"),
-("Kate", "password");
+("Jane", "$2a$10$TVhyU87sDr.W8Tc/peGDJuuozRs.IbLVT1ixCj.aiZkOn1ockabBm"),
+("John", "$2a$10$TVhyU87sDr.W8Tc/peGDJuuozRs.IbLVT1ixCj.aiZkOn1ockabBm"),
+("Kate", "$2a$10$TVhyU87sDr.W8Tc/peGDJuuozRs.IbLVT1ixCj.aiZkOn1ockabBm");
 
 insert into todos (title, is_done, owner_id  ) values
 ("kutyat setaltatni", false, 1),

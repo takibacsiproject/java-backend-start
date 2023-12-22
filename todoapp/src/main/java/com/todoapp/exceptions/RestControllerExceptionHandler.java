@@ -17,6 +17,11 @@ public class RestControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(e.getMessage()));
     }
 
+    @ExceptionHandler(WrongUsernameOrPasswordException.class)
+    public ResponseEntity<ErrorMessage> handleUnauthorizedExceptions(WrongUsernameOrPasswordException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorMessage(e.getMessage()));
+    }
+
     @ExceptionHandler(ForbiddenActionException.class)
     public ResponseEntity<ErrorMessage> handleForbiddenExceptions(ForbiddenActionException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorMessage(e.getMessage()));
