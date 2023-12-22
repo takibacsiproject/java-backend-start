@@ -1,6 +1,8 @@
 package com.todoapp.services;
 
+import com.todoapp.exceptions.ForbiddenActionException;
 import com.todoapp.exceptions.NoSuchTodoException;
+import com.todoapp.exceptions.NoSuchUserException;
 import com.todoapp.models.dto.NewTodo;
 import com.todoapp.models.dao.Todo;
 import com.todoapp.models.dto.UpdateTodo;
@@ -15,11 +17,13 @@ public interface TodoService {
 
     Todo getById(Integer id) throws NoSuchTodoException;
 
-    Todo save(NewTodo todo);
+    Todo save(Integer userId, NewTodo todo) throws NoSuchUserException;
 
-   Todo update(Integer id, UpdateTodo update) throws NoSuchTodoException;
+   Todo update(Integer userId, Integer todoId, UpdateTodo update)
+           throws NoSuchUserException, NoSuchTodoException, ForbiddenActionException;
 
-    void delete(Integer id) throws NoSuchTodoException;
+    void delete(Integer userId, Integer todoId)
+            throws NoSuchTodoException, NoSuchUserException, ForbiddenActionException;
 
 
 }
